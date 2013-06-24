@@ -1,0 +1,196 @@
+\documentclass{report}
+\bibliographystyle{amsalpha}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%%  FILE:  ent.tex 
+%%          -- Elementary Number Theory and Elliptic Curves
+%% 
+%%  (c) 2004,2007 -- William Stein (wstein@gmail.com)
+%% 
+%%  Under contract to publish with Springer-Verlag. 
+%%  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{ent}
+
+\usepackage{svsing2e}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb} 
+\usepackage{amsopn}
+\usepackage{amsthm}
+
+% to turn off the end of proof boxes
+%\renewcommand{\qedsymbol}{}
+
+\usepackage{fancybox}
+\usepackage{makeidx}  
+\usepackage{graphicx}
+%\usepackage[hypertex]{hyperref}
+%\usepackage[hyperindex,pdfmark]{hyperref}
+\usepackage{hyperref}
+
+\usepackage{xspace}  % to allow for text macros that don't eat space 
+
+\newcommand{\edit}[1]{}
+
+\numberwithin{section}{chapter}
+\numberwithin{equation}{section}
+\newcommand{\todo}[1]{{[[{\bf #1}]]}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Operators and macros
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareMathOperator{\Div}{Div}
+\DeclareMathOperator{\Li}{Li}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\ind}{ind}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\new}{new}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\tor}{tor}
+\DeclareMathOperator{\ur}{ur}
+\renewcommand{\i}[1]{\index{#1}}
+\newcommand{\ii}[1]{#1\index{#1}}
+\newcommand{\defn}[1]{{\em #1}\index{#1|nn}}
+\newcommand{\ithm}[1]{\index{theorem!#1}\index{#1 theorem}}
+\newcommand{\iprop}[1]{\index{proposition!#1}\index{#1 proposition}}
+\newcommand{\icor}[1]{\index{corollary!#1}\index{#1 corollary}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{{\mathbb D}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Gam}{\Gamma}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\abcd}[4]{%
+      \left(\begin{smallmatrix}#1&#2\\#3&#4%
+            \end{smallmatrix}\right)}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\alp}{\alpha}
+%\newcommand{\assign}{\leftarrow}
+\newcommand{\assign}{=}
+\newcommand{\con}{\equiv}
+\newcommand{\cross}{\times}
+\newcommand{\da}{\downarrow}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\exref}[2]{Exercise~\ref{#1}.\ref{#2}}
+\newcommand{\e}{\mathbf{e}}
+\newcommand{\hd}[1]{\vspace{1ex}\noindent{\bf #1} }
+\newcommand{\hra}{\hookrightarrow}
+\newcommand{\h}{\mathfrak{h}}
+\newcommand{\intersect}{\cap}
+\newcommand{\isom}{\cong}
+\newcommand{\kr}[2]{\left(\frac{#1}{#2}\right)}
+\newcommand{\la}{\leftarrow}
+\newcommand{\lra}{\longrightarrow}
+\newcommand{\m}{\mathfrak{m}}
+\newcommand{\ncisom}{\approx}
+\newcommand{\p}{\mathfrak{p}}
+\newcommand{\q}{\mathbf{q}}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\set}[1]{\{#1\}}
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\union}{\cup}
+\newcommand{\vphi}{\varphi}
+\newcommand{\zmod}[1]{\Z/#1\Z{}}
+\renewcommand{\L}{\mathcal{L}}
+\renewcommand{\O}{\mathcal{O}}
+\renewcommand{\P}{\mathbb{P}}
+\renewcommand{\Re}{\mbox{\rm Re}}
+\renewcommand{\a}{\mathfrak{a}}
+\renewcommand{\l}{\ell}
+\renewcommand{\mathbb}{\mathbf}
+\renewcommand{\t}{\tau}
+\newcommand{\nn}[1]{{\bf #1}} % used for primary ref in index
+
+\newcommand{\sage}{Sage\xspace}
+\newcommand{\SAGE}{\sage}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Theorem styles
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{joke}[theorem]{Joke}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{openproblem}[theorem]{Open Problem}
+
+\theoremstyle{definition}
+\newtheorem{alg}[theorem]{Algorithm}
+\newtheorem{listing}[theorem]{Listing}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{problem}[theorem]{Problem}
+
+\theoremstyle{remark}
+\newtheorem{goal}[theorem]{Goal}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{sg}[theorem]{SAGE Example}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Environments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newenvironment{algorithm}[1]{%
+\begin{alg}[#1]\index{algorithm!#1}
+}%
+{\end{alg}}
+\newenvironment{steps}%
+{\begin{enumerate}\setlength{\itemsep}{0.1ex}}{\end{enumerate}}
+
+\newenvironment{exercises}
+{\section{Exercises}
+ \renewcommand{\labelenumi}{\thechapter.\theenumi}
+  \begin{enumerate}
+}{\end{enumerate}}
+
+\newenvironment{solutions}[2]
+{\section*{Chapter~\ref{#1}}\newcommand{\chap}{#2}
+  %\renewcommand{\labelenumi}
+  \begin{enumerate}
+}{\end{enumerate}}
+
+
+\author{William Stein}
+\title{Elementary Number Theory:\\Primes, Congruences, and Secrets}
+%\date{March 2007}
+\makeindex    
+
+\setcounter{tocdepth}{1}
+
+\begin{document}
+\maketitle
+\pagenumbering{roman}
+\setcounter{page}{5}
+\newpage
+\mbox{}
+\vspace{2in}
+\begin{center}
+To my wife Clarita Lefthand
+\end{center}
+
+\newpage
+
+\tableofcontents
+\cleardoublepage
+\include{body}
+
+%%%%%%%%%%
+\bibliography{book}
+
+\printindex
+
+
+\end{document}

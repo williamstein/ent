@@ -1,0 +1,29 @@
+\RequirePackage{color}
+
+\definecolor{dblue}{rgb}{0.0,0.0,0.5}
+
+%\newcommand{\code}[1]{{\color{dblue}\textrm{\@vobeyspaces\@noligs\def\{{\char`\{}\def\}{\char`\}}\def\~{\char`\~}\def\^{\char`\^}\def\e{\char`\\}\def\${\char`\$}\def\#{\char`\#}\def\&{\char`\&}\def\%{\char`\%}%
+%\texttt{#1}}}}
+\newcommand{\code}[1]{{\textrm{\@vobeyspaces\@noligs\def\{{\char`\{}\def\}{\char`\}}\def\~{\char`\~}\def\^{\char`\^}\def\e{\char`\\}\def\${\char`\$}\def\#{\char`\#}\def\&{\char`\&}\def\%{\char`\%}%
+\texttt{#1}}}}
+
+\let\py@OldVerbatim=\verbatim
+\let\py@OldEndVerbatim=\endverbatim
+\RequirePackage{verbatim}
+
+%\renewcommand{\verbatim}{\py@OldVerbatim}
+%\renewcommand{\endverbatim}{\py@OldEndVerbatim}
+
+%  \color{dblue}%
+
+%\renewcommand{\verbatim}{%
+%  \mbox{}\vspace{-2ex}%\par%
+%  \setlength{\parindent}{1cm}%
+%  \begin{list}{}{\setlength{\leftmargin}{4ex}}%
+%     \item%
+%     \py@OldVerbatim%
+%}
+%\renewcommand{\endverbatim}{%
+%    \py@OldEndVerbatim%
+%  \end{list}%
+%}

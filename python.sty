@@ -1,0 +1,39 @@
+% -- I snipped this from the Python documentation distribution -- William Stein
+
+% This sets up the {verbatim} environment to be indented and a minipage,
+% and to have all the other mostly nice properties that we want for
+% code samples.
+
+\let\py@OldVerbatim=\verbatim
+\let\py@OldEndVerbatim=\endverbatim
+\RequirePackage{verbatim}
+\RequirePackage{ifthen}
+
+% Variable used by begin code command
+\newlength{\py@codewidth}
+
+\renewcommand{\verbatim}{%
+  \setlength{\parindent}{1cm}
+  % Calculate the text width for the minipage:
+  \setlength{\py@codewidth}{\linewidth}%
+  \addtolength{\py@codewidth}{-\parindent}%
+  %
+\ifthenelse{\equal{#1}{}}{}{%
+%\begin{listing}[#1]\label{listing:#1}\index{code listing!#1}\mbox{}\vspace{-1.5em}\newline{}
+}
+\begin{list}{}{%
+  \ifthenelse{\equal{#1}{}}{\setlength{\leftmargin}{4ex}}%
+                           {\setlength{\leftmargin}{0ex}}}%
+     \item%
+     \py@OldVerbatim%
+}
+\renewcommand{\endverbatim}{%
+    \py@OldEndVerbatim%
+  \end{list}%
+  %\end{listing}%
+%  \ifthenelse{\lengthtest{\leftmargin>2ex}}{\vspace{0.5em}}
+%{\end{listing}}%
+}
+
+\newcommand{\code}[1]{{\color{blue}\textrm{\@vobeyspaces\@noligs\def\{{\char`\{}\def\}{\char`\}}\def\~{\char`\~}\def\^{\char`\^}\def\e{\char`\\}\def\${\char`\$}\def\#{\char`\#}\def\&{\char`\&}\def\%{\char`\%}%
+\texttt{#1}}}}

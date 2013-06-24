@@ -1,0 +1,7 @@
+pdflatex ent
+bibtex ent
+pdflatex ent
+pdflatex ent
+
+#make ent.pdf
+#latex2html ent-html

@@ -1,0 +1,290 @@
+% Copyright (C) 1988, 1994 Springer-Verlag, Inc.
+%
+% Everyone is granted permission to copy and redistribute this file, as
+% long as it is unchanged. If any changes are made the file MUST be renamed.
+%
+%
+% svsing2e.sty 22 Sep 94
+% Fixed lots & lots of bugs
+% Made compatible with LaTeX2e
+%
+%get rid of ae's
+\catcode`\^^Z 10
+\typeout{LaTeX2e package "svsing2e" (Springer-Verlag Single-Authored). v. 1.3 released May 1995}
+%
+\@twosidetrue
+\headheight=9pt
+\headsep=15pt   % 2pc-9pt
+\textheight=45pc
+%Let's put integer number of 12-pt \baselineskip's on page
+\advance\textheight-2\p@
+\textwidth=27pc
+\parindent=1em
+\parskip\z@
+\clubpenalty\@M
+\widowpenalty\@M
+%
+% Running head: 9 pt TR, c/lc, 2em# inside of fl. outside folio, base aligns
+% with folio; recto: CN, period, word # to CT; verso: contributor's name(s).
+% In single-author, verso: SN, period, word # to ST.
+%
+% If you want the running heads on the opposite pages, just put \flipheads
+% after the documentstyle.  LaTeX isn't bright enough to allow one option
+% file to define ds@flipheads.
+%
+\def\markbothsame#1{\markboth{#1}{#1}}
+\def\ps@myheadings{%
+  \let\@mkboth\markboth % Instead of \@gobbletwo, for toc
+  \let\@oddfoot\@empty\let\@evenfoot\@empty
+  \def\@oddhead{\small\upshape\hfil\rightmark\hskip\tw@ em\thepage}%
+  \def\@evenhead{\small\upshape\thepage\hskip\tw@ em\leftmark\hfill}%
+  \def\chaptermark##1{\markbothsame%
+    {\ifnum\c@secnumdepth>\m@ne\@chapapp\ \thechapter. \ \fi##1}}%
+  \def\sectionmark##1{\markright{\ifnum\c@secnumdepth>\z@\thesection\ \fi
+    ##1}}}
+%
+\pagestyle{myheadings}
+\pagenumbering{roman}   % toc is in roman
+\pagestyle{myheadings}
+\def\@chapterauthors{}
+%
+% All pages without running heads must carry corner marks.
+%
+\def\clap#1{\hbox to 0pt{\hss#1\hss}}
+\newdimen\@crosshairrule \@crosshairrule=.24pt
+\def\@crosshairs{%
+\vbox to 0pt{\hsize=0pt\baselineskip=0pt\lineskip=0pt
+  \vss
+  \clap{\vrule height .125in width \@crosshairrule depth 0pt}
+  \clap{\vrule width .25in height \@crosshairrule depth 0pt
+    \rlap{\vbox to\z@{\vss\hbox{This is page \thepage\strut}%
+      \hbox{Printer: Opaque this\strut}\vss}}}
+  \clap{\vrule height .125in width \@crosshairrule depth 0pt}
+  \vss}}
+\def\ps@empty{%
+\def\@oddhead{\hfill\raise\headheight\@crosshairs}
+\let\@evenhead\@oddhead
+\def\@evenfoot{}\let\@oddfoot\@evenfoot}
+\frenchspacing
+\def\@chapapp{}
+%8/10
+\def\viiiONx{\@setfontsize\@footnotesize\@viiipt{10pt}}
+%10/12
+\def\xONxii{\@setfontsize\normalsize\@xpt{12pt}}
+%12/14
+\def\xiiONxiv{\@setfontsize\large\@xiipt{14pt}}
+%14/16
+\def\xivONxvi{\@setfontsize\Large\@xivpt{16pt}}
+%14/14
+\def\xivONxiv{\@setfontsize\Large\@xivpt{14pt}}
+%20/20
+\def\xxONxx{\@setfontsize\huge\@xxpt{20pt}}
+%
+\renewcommand\footnotesize{%
+   \viiiONx
+   \abovedisplayskip 6\p@ \@plus2\p@ \@minus4\p@
+   \abovedisplayshortskip \z@ \@plus\p@
+   \belowdisplayshortskip 3\p@ \@plus\p@ \@minus2\p@
+   \def\@listi{\leftmargin\leftmargini
+               \topsep 3\p@ \@plus\p@ \@minus\p@
+               \parsep 2\p@ \@plus\p@ \@minus\p@
+               \itemsep \parsep}%
+   \belowdisplayskip \abovedisplayskip
+}
+\font\chnum = cmr10 scaled \magstep5
+\def\chapter{\cleardoublepage      % Starts new recto.
+   \thispagestyle{empty}     % Page style of chapter page is 'empty'
+   \global\@topnum\z@        % Prevents figures from going at top of page.
+   \@afterindentfalse        % Suppresses indent in first paragraph.  Change
+   \secdef\@chapter\@schapter}   % to \@afterindenttrue to have indent.
+%
+% Chapter number: 24 CM, arabic numeral, fl.l, top text
+% Chapter title: 20/20 CM x 27pc, c/lc, fl.l, sink 60 pt from top
+%       type to base of CT, to's fl.l, do not hyphenate
+%
+\def\@makechapterhead#1{             % Heading for \chapter command
+% We want the chapter number to be 20 pts from top text.  The simplest
+% was is to set \topskip, making sure there's nothing between the number
+% and the top of page, so \baselineskip doesn't come in.
+\vbox to 238pt{{ \topskip=20pt \parindent 0pt \raggedright
+    \xxONxx\rm
+    \ifnum \c@secnumdepth >\m@ne     % IF secnumdepth > -1 THEN
+        {\chnum \@chapapp{} \thechapter} % Print 'Chapter' and number.
+    \fi
+    \par
+    \vskip 10pt             % Space between number and title.
+    #1\par                      % Title.
+    \nobreak                    % TeX penalty to prevent page break.
+~    \vfil
+}  }  }
+%
+\def\@makeschapterhead#1{             % Heading for \chapter* command
+\vbox to 238pt{{ \topskip=46pt \parindent 0pt \raggedright
+    \xxONxx\rm
+    #1\par                      % Title.
+    \nobreak                    % TeX penalty to prevent page break.
+     \vfil
+}  } }
+%
+% Restart the footnote counter each chapter.
+%
+%\newcounter{footnote}[chapter]
+%
+% FN    1pc space above footnotes to text.
+%       5 pc 1/2 pt rule fl.l. above footnotes
+%       leave 6pt # after rule followed by ftn
+%
+\skip\footins=18.5pt    % space above line and below line, 1pc+6pt+.5pt
+\footskip=16pt
+\footnotesep=7pt        % pretty arbitrary
+\def\footnoterule{\kern-6.5pt\hrule width 5pc height .5pt\vskip 6pt}
+%
+% Footnote at end of chapter position below last text line (not at bottom
+% of page).
+%
+\def\clearpage{\par\vfill\penalty -\@M \write\m@ne{}\vbox{}\penalty -\@Mi}
+\def\newpage{\par\vfill\penalty -\@M}
+\def\@makecol{\ifvoid\footins \setbox\@outputbox\box\@cclv
+   \else\setbox\@outputbox
+     \vbox{\unvbox\@cclv\vskip\skip\footins\footnoterule\unvbox\footins}\fi
+     \xdef\@freelist{\@freelist\@midlist}\gdef\@midlist{}\@combinefloats
+     \setbox\@outputbox\vbox to\@colht{\boxmaxdepth\maxdepth
+        \@texttop
+        \unvbox\@outputbox
+        \@textbottom}\global\maxdepth\@maxdepth}
+\flushbottom
+%
+% Abstract: 9/11 TRx25pi, sink 2.5pi b/b from CA
+%
+\def\abstract{\vskip 21pt % from CA
+\rightskip=1pc\leftskip=1pc\parindent=\z@
+\small\rm
+{ABSTRACT }}
+\def\endabstract{\par}  % If we don't do this, the paragraph won't be
+                        % set until after rightskip and leftskip have been
+                        % returned to their old values.
+%
+\def\tableofcontents{\@restonecolfalse\if@twocolumn\@restonecoltrue\onecolumn
+  \fi\chapter*{Contents}\markbothsame{Contents}%
+  \@starttoc{toc}\if@restonecol\twocolumn\fi}
+%
+% Don't indent the paragraph following each header.  Vertical distances
+% showld have \baselineskip taken out, and the height of the next
+% line, which should be text (10/12 TR).
+%
+\setcounter{secnumdepth}{2}     % number section and subsections
+\setcounter{tocdepth}{2}        % and put them in the table of contents
+% No 1 Head, 14/16 TR, 36pt b/b above, 24 tp b/b below
+\def\section{\@startsection
+    {section}{1}{\z@}{-24pt plus -6pt minus -3pt}{12pt}%
+        {\xivONxvi\rm\raggedright}}
+% No 2 Head, 12/14 TR, c/sc, 30pt above, 18 pt below
+\def\subsection{\@startsection
+    {subsection}{2}{\z@}{-18pt plus-4.8pt minus-2.4pt}{6pt}%
+        {\xiiONxiv\it\raggedright}}
+% No 3 Head, 10/12 TR, 24pt above, 18pt below
+\def\subsubsection{\@startsection
+    {subsubsection}{3}{\z@}{-12pt plus-4.2pt minus-2.1pt}{6pt}%
+        {\xONxii\rm\raggedright}}
+% No 4 Head, 10/12 TR italic, 20pt above, 18pt below
+\def\paragraph{\@startsection
+     {paragraph}{4}{\z@}{-8pt plus-3.8pt minus-1.7pt}{6pt}%
+        {\xONxii\it\raggedright}}
+% No 5 Head, 10/12 TR italic, period,  en space to run in text, 18pt above
+\def\subparagraph#1{\@startsection
+     {subparagraph}{5}{\z@}{-6pt plus-1.8pt minus-.9pt}{-.5em}{\xONxii\it}{#1.}}
+% Ack: Acknowledgements same as No 5 head, 36pt above
+\def\acknowledgments{\@startsection
+     {subparagraph}{6}{\z@}{-24pt plus-3.6pt minus-1.8pt}{-.5em}%
+        {\xONxii\it}*{Acknowledgments:\/}}
+% R-1: ``References'', same as No.2 head
+% unless it's single-author.
+\def\mainbibliography#1{{\bibliography{#1}}}
+\def\thebibliography#1{%
+  \chapter*{References}\markbothsame{References}%
+  \addcontentsline{toc}{chapter}{\protect\numberline{}References}%
+%endif
+  \list
+  {[\arabic{enumiv}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
+    \advance\leftmargin\labelsep
+%Per zwart, enumi replaced by enumiv in this macro
+    \usecounter{enumiv}}
+    \def\newblock{\hskip .11em plus .33em minus -.07em}
+    \sloppy
+    \sfcode`\.=1000\relax}
+% Put index in the toc
+\def\theindex{\@restonecoltrue\if@twocolumn\@restonecolfalse\fi
+\columnseprule \z@
+\columnsep 35pt\twocolumn[\@makeschapterhead{Index}]
+    \addcontentsline{toc}{chapter}{\protect\numberline{}Index}%
+    \@mkboth{Index}{Index}\thispagestyle{empty}\parindent\z@
+    \parskip\z@ plus .3pt\relax\let\item\@idxitem}
+\def\theauthorindex{\@restonecoltrue\if@twocolumn\@restonecolfalse\fi
+\columnseprule \z@
+\columnsep 35pt\twocolumn[\@makeschapterhead{Author Index}]
+    \addcontentsline{toc}{chapter}{\protect\numberline{}Author Index}%
+    \@mkboth{Author Index}{Author Index}\thispagestyle{empty}\parindent\z@
+    \parskip\z@ plus .3pt\relax\let\item\@idxitem}
+\def\thesubjectindex{\@restonecoltrue\if@twocolumn\@restonecolfalse\fi
+\columnseprule \z@
+\columnsep 35pt\twocolumn[\@makeschapterhead{Subject Index}]
+    \addcontentsline{toc}{chapter}{\protect\numberline{}Subject Index}%
+    \@mkboth{Subject Index}{Subject Index}\thispagestyle{empty}\parindent\z@
+    \parskip\z@ plus .3pt\relax\let\item\@idxitem}
+\def\thesymbolindex{\@restonecoltrue\if@twocolumn\@restonecolfalse\fi
+\columnseprule \z@
+\columnsep 35pt\twocolumn[\@makeschapterhead{Symbol Index}]
+    \addcontentsline{toc}{chapter}{\protect\numberline{}Symbol Index}%
+    \@mkboth{Symbol Index}{Symbol Index}\thispagestyle{empty}\parindent\z@
+    \parskip\z@ plus .3pt\relax\let\item\@idxitem}
+%
+% lists: 10/12 TRx27pc, 1/2line# above/below
+%
+\topsep 6pt plus1.8pt minus.9pt    % Extra vertical space, in addition to
+                                   % \parskip, added above and below list and
+                                   % paragraphing environments.
+\itemsep 6pt plus1.8pt minus.9pt   % Extra vertical space, in addition to
+                                   % \parskip, added between list items.
+%
+% Eq: Center on text width; equation numbers set flush right, align with
+% last line of equation, 6pt # above/below.
+%
+\abovedisplayskip=6pt plus 1.8pt minus.9pt
+\belowdisplayskip=\abovedisplayskip
+\abovedisplayshortskip=\z@ plus 1.2pt
+\belowdisplayshortskip=3pt plus 1.5pt minus .75pt
+%
+% FL: Figure legends ``FIGURE 0.0'' 9/11 TR, c/lc, period, word # to text.
+\floatsep 12pt plus 2.4pt minus 1.2pt
+\textfloatsep 12pt plus 4.8pt
+\intextsep 12pt plus 2.4pt minus 1.2pt
+%%\@maxsep 12pt  %% Not used in LaTeX2e
+%
+\long\def\@makecaption#1#2{{
+   \vskip 6pt
+   \small
+   \setbox\@tempboxa\hbox{#1. #2}
+   \ifdim \wd\@tempboxa >\hsize   % IF longer than one line:
+       \unhbox\@tempboxa\hfil\par      %   THEN set as ordinary paragraph.
+     \else                        %   ELSE  center.
+       \hbox to\hsize{\hfil\box\@tempboxa\hfil}
+   \fi}}
+\def\fnum@figure{\small FIGURE \thefigure}%{\sc FIGURE~}\thefigure}
+%
+% TN+TT: ``TABLE 0.0'' 9/11 TR, c/lc. period, word # to table title:
+% 3 pt # below to 1/2 pt rule x table measuer, 3 pt # below rule to
+% TCH
+%
+\arrayrulewidth=.5pt
+\def\fnum@table{\small TABLE~\thetable}
+%
+\usepackage{psfig}
+\def\figput#1#2#3{\begin{figure}\hfil%
+\psfig{figure=#1,height=#2}\hfil\caption{#3}%
+                    \end{figure}}
+\def\figpage#1#2#3{\begin{figure}[p]\hfil%
+\psfig{figure=#1,height=#2}\hfil\caption{#3}%
+                    \end{figure}}
+% End of svsing2e.sty
+\endinput
+
