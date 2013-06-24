@@ -4806,11 +4806,11 @@ sage: legendre_symbol(2,31)
 \subsection{Euler's Proposition}\index{Euler's proposition}
 For rational numbers $a,b\in\Q$, let
 $$
-(a,b)\intersect\Z = \{x \in \Z : a\leq x \leq b\}
+(a,b)\intersect\Z = \{x \in \Z : a < x < b\}
 $$
 be the set of integers between~$a$ and~$b$.  The following
 lemma will help us to keep track of how many integers lie in
-certain intervals.
+certain open intervals.
 \begin{lemma}\label{lem:even}
 Let $a, b\in\Q$.  Then for any integer~$n$,
 $$\#\left((a,b)\intersect \Z\right) \con \#\left((a,b+2n)\intersect \Z\right) \pmod{2}$$
