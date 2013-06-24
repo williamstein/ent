@@ -5703,16 +5703,16 @@ sage: continued_fraction(17/23)
 [0, 1, 2, 1, 5]
 sage: continued_fraction(e)
 [2, 1, 2, 1, 1, 4, 1, 1, 6, 1, 1, 8, 1, 1, 10, 1, 1,
- 12, 1, 1, 11]
+ 12, 1, 1]
 \end{verbatim}
 Use the optional second argument \code{bits = n} to determine the
 precision (in bits) of the input number that is used to compute the
 continued fraction.
 \begin{verbatim}
-sage: continued_fraction(e, bits=20)
+sage: continued_fraction(e, bits=21)
 [2, 1, 2, 1, 1, 4, 1, 1, 6]
 sage: continued_fraction(e, bits=30)
-[2, 1, 2, 1, 1, 4, 1, 1, 6, 1, 1, 8, 1, 1]
+[2, 1, 2, 1, 1, 4, 1, 1, 6, 1, 1, 8]
 \end{verbatim}
 You can obtain the value of a continued fraction
 and even do arithmetic with continued fractions:
@@ -5775,10 +5775,10 @@ If \code{c} is a continued fraction, use \code{c.convergents()}
 to compute a list of the partial
 convergents of \code{c}.
 \begin{verbatim}
-sage: c = continued_fraction(pi,bits=33); c
-[3, 7, 15, 1, 292, 2]
+sage: c = continued_fraction(pi,bits=35); c
+[3, 7, 15, 1, 292, 1]
 sage: c.convergents()
-[3, 22/7, 333/106, 355/113, 103993/33102, 208341/66317]
+[3, 22/7, 333/106, 355/113, 103993/33102, 104348/33215]
 \end{verbatim}
 As we will see, the convergents of a continued fraction
 are the best rational approximations to the value of
@@ -5837,13 +5837,13 @@ for the first few terms of the continued
 fraction of $\pi$.
 \begin{verbatim}
 sage: c = continued_fraction(pi); c
-[3, 7, 15, 1, 292, 1, 1, 1, 2, 1, 3, 1, 14, 3]
+[3, 7, 15, 1, 292, 1, 1, 1, 2, 1, 3, 1, 14]
 sage: for n in range(-1, len(c)):
 ...    print c.pn(n)*c.qn(n-1) - c.qn(n)*c.pn(n-1),
-1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1
+1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1
 sage: for n in range(len(c)):
 ...    print c.pn(n)*c.qn(n-2) - c.qn(n)*c.pn(n-2),
-3 -7 15 -1 292 -1 1 -1 2 -1 3 -1 14 -3
+3 -7 15 -1 292 -1 1 -1 2 -1 3 -1 14
 \end{verbatim}
 \end{sg}
 
@@ -6063,13 +6063,13 @@ sage: def cf(bits):
 ...   x = (1 + sqrt(RealField(bits)(5))) / 2
 ...   return continued_fraction(x)
 sage: cf(10)
-[1, 1, 1, 1, 1, 1, 1, 3]
+[1, 1, 1, 1, 1, 1, 1]
 sage: cf(30)
 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
- 1, 1, 1, 2]
+ 1, 1, 1]
 sage: cf(50)
 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
- 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 \end{verbatim}
 \end{sg}
 
@@ -6530,7 +6530,7 @@ sage: def cf_sqrt_d(d, bits):
 ...   x = sqrt(RealField(bits)(d))
 ...   return continued_fraction(x)
 sage: cf_sqrt_d(389,50)
-[19, 1, 2, 1, 1, 1, 1, 2, 1, 38, 1, 2, 1, 1, 1, 1, 2, 1, 38]
+[19, 1, 2, 1, 1, 1, 1, 2, 1, 38, 1, 2, 1, 1, 1, 1, 2, 1, 38, 2]
 sage: cf_sqrt_d(389,100)
 [19, 1, 2, 1, 1, 1, 1, 2, 1, 38, 1, 2, 1, 1, 1, 1, 2, 1, 38,
  1, 2, 1, 1, 1, 1, 2, 1, 38, 1, 2, 1, 1, 1, 1, 2, 1, 38, 1,
@@ -6851,7 +6851,7 @@ the continued fraction of the result:
 sage: a = newton_root(3847*x^2 - 14808904*x + 36527265); a
 2.46815700480740
 sage: cf = continued_fraction(a); cf
-[2, 2, 7, 2, 1, 5, 1, 1, 1, 1, 1, 1, 103, 8, 1, 2, 3, 1, 1]
+[2, 2, 7, 2, 1, 5, 1, 1, 1, 1, 1, 1, 103, 8, 1, 2, 3]
 \end{verbatim}%link
 
 \par\noindent{}We truncate the continued fraction and compute
