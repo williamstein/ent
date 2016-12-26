@@ -907,8 +907,8 @@ $$
   p = 2^{32582657}-1,
 $$
 which has 9,808,358 decimal
-digits\footnote{The 45th known Mersenne prime may
-have been found on August 23, 2008 as this book goes to press.}.
+digits\footnote{The 49th known Mersenne prime may
+have been found on January 7, 2016.}.
 This would take over 2000 pages to
 print, assuming a page contains 60 lines with 80 characters per line.
 The Electronic Frontier Foundation has offered a \$100,000 prize to
@@ -1251,7 +1251,7 @@ $\ds \lim_{x\to\infty} \frac{\pi(x)}{x} = 0$.
 $4k-1$ that are $\leq x$.  Use a computer to make a conjectural
 guess about $\lim_{x\to\infty} \psi(x) / \pi(x)$.
 
-\item So far $44$ Mersenne primes $2^p-1$ have been discovered.
+\item So far $49$ Mersenne primes $2^p-1$ have been discovered.
 Give a guess, backed up by an argument, about
 when the next Mersenne prime might be discovered (you will have
 to do some online research).
@@ -5551,7 +5551,7 @@ proof of the full Quadratic Reciprocity Law.
 \end{enumerate}
 
 \item\label{ex:rec14}(*) Prove that for any $n\in\Z$, the integer
-  $n^2+n+1$ does not have any divisors of the form $6k-1$.
+  $n^2+n+1$ does not have any {\it positive} divisors of the form $6k-1$.
 
 \end{exercises}
 
@@ -7163,7 +7163,7 @@ Prove that the decimal expansion of $\frac{1}{d}$ has a period
 equal to the order of~$10$ modulo~$d$.
 (Hint: For every positive integer~$r$,  we have
 $
-  \frac{1}{1-10^r} = \sum_{n\geq 1} 10^{-rn}.
+  \frac{1}{1-10^{-r}} = \sum_{n\geq 1} 10^{-rn}.
 $)
 
 
@@ -7901,7 +7901,7 @@ $(a_1,\ldots,a_r) = f(a)$.  Then $(a_1^m,\ldots,a_r^m) = f(a^m)$, and
 the $p_i$ that divide $\gcd(a^m-1,N)$ are exactly the $p_i$ such that
 $a_i^m=1$.  By Theorem~\ref{thm:fermatlittle}, these $p_i$ include the
 primes~$p_j$ such that $p_j-1$ is $B$-power smooth, where
-$m=\lcm(1,\ldots,m)$.
+$m=\lcm(1,\ldots,B)$.
 
 We will not define $E(\zmod{N})$ when~$N$ is composite, since this is
 not needed for the algorithm (where we assume that~$N$ is prime and
@@ -8650,9 +8650,7 @@ $p^2=r^3-rk^4$.
 \item Prove that $r$ is a perfect square by supposing that there is a
   prime~$\ell$ such that $\ord_{\ell}(r)$ is odd, and analyzing
   $\ord_{\ell}$ of both sides of $p^2=r^3-rk^4$.
-\item Write $r=m^2$, and substitute to
-see that $p^2=m^6-m^2k^4$. Prove that $m\mid p$.
-\item Divide through by $m^2$ and deduce a contradiction
+\item Write $r=m^2$, and substitute to see that $p^2=m^6-m^2k^4$. Divide through by $m^2$ and deduce a contradiction
 to \exref{ch:ec}{ex:flt4}.
 \end{enumerate}
 
