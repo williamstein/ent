@@ -1476,7 +1476,7 @@ field\index{field!of integers modulo $p$} (see
   since $7+3\Z = 1+3\Z$.
 \end{definition}
 
-We can use that arithmetic in $\zmod{n}$ is well defined is to
+We can use that arithmetic in $\zmod{n}$ is well defined to
 derive tests for divisibility\index{divisibility tests} by $n$ (see
 \exref{ch:cong}{ex:divrules}).
 \begin{proposition}\label{prop:div3}\iprop{divisibility by 3}
@@ -1913,7 +1913,7 @@ $x\con y\pmod{nm}$.
 
 \begin{algorithm}{Chinese Remainder Theorem}\label{alg:crt}
 Given coprime integers $m$ and $n$ and integers $a$ and $b$,
-this algorithm find an integer $x$ such that $x\con a\pmod{m}$
+this algorithm finds an integer $x$ such that $x\con a\pmod{m}$
 and $x\con b\pmod{n}$.
 \begin{steps}
 \item{}[Extended GCD] Use Algorithm~\ref{alg:xgcd} below
@@ -2171,7 +2171,7 @@ and go to Step~\ref{alg:xgcd_2}.
 \begin{proof}
 This algorithm is the same as Algorithm~\ref{alg:gcd}, except that we
 keep track of extra variables $x,y,r,s$, so it terminates and when
-it terminates $d=\gcd(a,b)$.
+it terminates $g=\gcd(a,b)$.
 We omit the rest of the inductive proof that the algorithm
 is correct, and instead refer the  reader to
 \cite[\S1.2.1]{knuth1}.
