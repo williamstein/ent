@@ -859,7 +859,7 @@ of all odd integers between $3$ and $n$.  Let $P\assign [2]$ be the list
 of primes found so far.
 \item{}[Finished?]\label{alg:sieve_2}
 Let $p$ be the first element of $X$.
-If $p\geq \sqrt{n}$, append each element of~$X$
+If $p>\sqrt{n}$, append each element of~$X$
 to~$P$ and terminate.   Otherwise append $p$ to $P$.
 \item{}[Cross Off]
 Set~$X$ equal to the sublist of elements in~$X$ that
@@ -2242,7 +2242,7 @@ the number of operations needed grows with the number of binary digits
 of~$m$, whereas with the naive algorithm in the previous paragraph, the
 number of operations is $m-1$.
 
-\begin{algorithm}{Write a number in binary}\label{alg:binary}%
+\begin{algorithm}{Write a Number in Binary}\label{alg:binary}%
 \index{binary, writing number in}
 Let $m$ be a nonnegative integer.  This algorithm writes~$m$ in
 binary, so it finds $\eps_i\in\{0,1\}$ such that
@@ -2255,7 +2255,7 @@ If~$m$ is odd, set $\eps_i\assign 1$, otherwise $\eps_i\assign 0$.
 Increment~$i$.
 \item{}[Divide by $2$]
 Set~$m \assign \left\lfloor\frac{m}{2}\right\rfloor$, the
-greatest integer $\leq m/2$.  Goto Step~\ref{alg:binary_2}.
+greatest integer $\leq m/2$.  Go to Step~\ref{alg:binary_2}.
 \end{steps}
 \end{algorithm}
 
@@ -2366,7 +2366,7 @@ $$
 \end{theorem}
 \begin{proof}
 If~$p$ is prime, then the statement follows from
-Proposition~\ref{prop:wilson}.  If~$p$ is composite,
+Theorem~\ref{thm:fermatlittle}.  If~$p$ is composite,
 then there is a divisor~$a$ of~$p$ with $2 \leq a < p$.
 If $a^{p-1}\con 1\pmod{p}$, then $p\mid a^{p-1} -1$.
 Since $a\mid p$,  we have $a \mid a^{p-1} -1$, hence
@@ -2574,7 +2574,7 @@ The main result is that this group is always cyclic.
 We will use this result later in Chapter~\ref{ch:reciprocity}
 in our proof of quadratic reciprocity.
 
-\begin{definition}[Primitive root]\label{defn:primroot}
+\begin{definition}[Primitive Root]\label{defn:primroot}
 A \defn{primitive root} modulo an integer~$n$ is an element of
 $(\zmod{n})^*$ of order $\vphi(n)$.
 \end{definition}
@@ -2812,7 +2812,7 @@ is a primitive root modulo~$p^n$.
 \end{theorem}
 The proof is left as \exref{ch:cong}{ex:prim2}.
 
-\begin{proposition}[Number of primitive roots]\iprop{number of primitive roots}
+\begin{proposition}[Number of Primitive Roots]\iprop{number of primitive roots}
 If there is a primitive root modulo~$n$,
 then there are exactly $\vphi(\vphi(n))$ primitive roots modulo~$n$.
 \end{proposition}
@@ -4871,7 +4871,7 @@ element of $S$ that is equivalent modulo $p$ to an
 element of $(-\frac{p}{2},0)$ lies in~$I$.
 Next suppose that $b=\frac{1}{2}(a-1)$.  Then
 $$
-  bp+\frac{p}{2} = \frac{a-1}{2}p + \frac{p}{2} = \frac{p-1+a}{2}> \frac{p-1}{2}a,
+  bp+\frac{p}{2} = \frac{a-1}{2}p + \frac{p}{2} = \frac{p}{2}a> \frac{p-1}{2}a,
 $$ so $((b-\frac{1}{2})p,bp)$ is the
 last interval that could contain an element of $S$ that reduces to
 $(-\frac{p}{2},0)$.  Note that the integer endpoints of~$I$ are not
@@ -4930,7 +4930,7 @@ The following more careful analysis in the special case when $a=2$
 helps illustrate the proof of the above lemma, and the result is
 frequently useful in computations.  For an alternative proof
 of the proposition, see \exref{ch:reciprocity}{ex:rec8}.
-\begin{proposition}[Legendre Lymbol of $2$]%
+\begin{proposition}[Legendre Symbol of $2$]%
 \label{prop:p2}\iprop{Legendre symbol of 2}
 Let~$p$ be an odd prime.  Then
 $$
@@ -4939,7 +4939,7 @@ $$
 $$
 \end{proposition}
 \begin{proof}
-When $a=2$, the set $S = \{a,2a,\ldots,2\cdot\frac{p-1}{2}\}$ is
+When $a=2$, the set $S = \{a,2a,\ldots,\frac{p-1}{2}a\}$ is
 $$
 \{ 2, 4, 6, \ldots, p-1 \}.
 $$
@@ -5402,7 +5402,7 @@ following three possibilities for a square root of~$69$:
 $$
   -\frac{u}{v} = 0 \qquad
   \frac{1-u}{v} = 153\qquad
-  -\frac{1-u}{v} = -153.
+  \frac{-1-u}{v} = -153.
 $$
 Thus, $153$ and $-153$ are the square roots of $69$ in $\zmod{389}$.
 \end{example}
@@ -5492,7 +5492,7 @@ $$
   x = \frac{1-t^2}{1+t^2}, \qquad y = \frac{2t}{1+t^2}
 $$
 is a parameterization of the set of solutions to $x^2+y^2\con 1\pmod{p}$,
-in the sense that the solutions $(x,y)\in\zmod{p}$ are in
+in the sense that the solutions $(x,y)\in \zmod{p} \times \zmod{p}$ are in
 bijection with the $t\in \zmod{p} \union\{\infty\}$ such that $1+t^2\not\con 0\pmod{p}$.
 Here, $t=\infty$ corresponds to the point $(-1,0)$.
 (Hint: if $(x_1,y_1)$ is a solution, consider the line $y=t(x+1)$
@@ -5697,7 +5697,9 @@ Also,
 
 \begin{sg}
 The \code{continued\_fraction} command  computes
-continued fractions:
+continued fractions\footnote{The continued\_fraction module of \sage
+has changed a lot. Please refer to the documentation of \sage online
+for the newest version.}:
 \begin{verbatim}
 sage: continued_fraction(17/23)
 [0, 1, 2, 1, 5]
@@ -5733,7 +5735,7 @@ sage: a + b
 Fix a finite continued fraction $[a_0,\ldots,a_m]$.  We do not assume
 at this point that the $a_i$ are integers.
 
-\begin{definition}[Partial convergents]
+\begin{definition}[Partial Convergents]
 For $0\leq n\leq m$, the $n$th \defn{convergent} of the
 continued fraction $[a_0,\ldots,a_m]$
 is $[a_0,\ldots, a_n]$.  These convergents for $n<m$ are
@@ -6291,7 +6293,7 @@ Thus
            &= \frac{1}{q_n \cdot q_{n+1}} \leq \frac{1}{n(n+1)} \ra 0.
 \end{align*}
 In the inequality, we use that $a_{n+1}$ is the integer part of
-$\frac{1}{t_n}$, and is hence $\leq \frac{1}{t_n}<1$, since $t_n<1$.
+$\frac{1}{t_n}$, and is hence $\leq \frac{1}{t_n}$.
 \end{proof}
 
 This corollary follows from the proof of Theorem~\ref{thm:contfracdoesconv}.
@@ -8399,7 +8401,7 @@ has something to say about the above problem.  In order to understand
 this connection, we begin with an elementary algebraic proposition
 that establishes a link between elliptic curves
 and the congruent number problem.
-\begin{proposition}[Congruent numbers and elliptic curves]\label{prop:congbij}%
+\begin{proposition}[Congruent Numbers and Elliptic Curves]\label{prop:congbij}%
 \iprop{congruent numbers and elliptic curves}
 Let~$n$ be a rational number.   There is a bijection between
 $$
@@ -8423,7 +8425,7 @@ The proof of this proposition is not deep, but involves substantial
 (elementary) algebra and we will not prove it in this book.
 
 For $n\neq 0$, let $E_n$ be the elliptic curve $y^2 = x^3 - n^2 x$.
-\begin{proposition}[Congruent number criterion]%
+\begin{proposition}[Congruent Number Criterion]%
 \iprop{congruent number criterion}%
   The rational number~$n$ is a congruent number if and only if
 there is a point $P=(x,y)\in E_n(\Q)$ with $y\neq 0$.

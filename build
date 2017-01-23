@@ -1,5 +1,6 @@
 pdflatex ent
 bibtex ent
+makeindex ent
 pdflatex ent
 pdflatex ent
 
